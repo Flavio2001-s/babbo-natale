@@ -71,14 +71,72 @@ body{background:linear-gradient(#050b24,#0e2455 55%,#2b4c80) fixed;padding-botto
 @keyframes scoppio{to{transform:translate(var(--x),var(--y)) rotate(600deg);opacity:0}}
 @media(max-width:600px){body{padding-bottom:120px}.paese{height:110px}.colline{height:80px}.bosco{width:105px;height:84px;bottom:4px}.treno{width:270px;bottom:4px;animation-duration:11s}@keyframes viaggio{from{transform:translateX(-280px)}to{transform:translateX(100vw)}}.luna{width:46px;height:46px;top:2%;right:4%}}
 @media(prefers-reduced-motion:reduce){.treno{animation:none;left:calc(50% - 135px)}.trotto,.gamba,.carico,.cielo,.pacco,.palline circle{animation:none}}
+/* v3 */
+.cornice{position:relative;z-index:1;width:100%;max-width:640px}
+.agrifoglio{position:absolute;z-index:2;width:112px;top:-30px;pointer-events:none;filter:drop-shadow(0 3px 3px #0006)}.a1{left:-34px;transform:rotate(-28deg)}.a2{right:-34px;transform:rotate(28deg) scaleX(-1)}
+main{max-width:none;border-radius:28px;background:linear-gradient(#fffdf6,#fbf0da);box-shadow:0 30px 80px #000b,0 0 0 2px #f7dc8b,0 0 0 7px #8f6a1e,0 0 0 9px #f7dc8b,0 0 60px #ffd36b44}
+header{border:0;border-bottom:3px solid #e8c66a;border-radius:0 0 50% 50%/0 0 26px 26px;background:radial-gradient(circle at 50% 25%,#d7222c,#8d0b17 60%,#5a0510);box-shadow:0 6px 14px #5a051044}
+h1{font-family:"Playfair Display",Didot,"Bodoni 72",Georgia,serif;font-size:clamp(29px,6vw,44px);background:linear-gradient(#fffbe8 25%,#f7d879 60%,#c99a2e);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 3px 1px #3a0207)}
+.firma::before,.firma::after{content:"";display:inline-block;width:44px;height:1px;margin:0 12px;vertical-align:middle;background:#f7d879}
+.budget{background:linear-gradient(#fff6d5,#f1d27c);box-shadow:0 2px 6px #0005;font-size:15px}
+.villaggio{position:absolute;left:0;bottom:30px;width:100%;height:270px}
+.paese{height:310px}
+.finestra{fill:#ffd96b;animation:calda 4s ease-in-out infinite alternate;filter:drop-shadow(0 0 5px #ffc93c)}@keyframes calda{50%{opacity:.65}}
+.fumo{fill:#dbe6f5;opacity:0;transform-box:fill-box;animation:fumo 4s linear infinite}@keyframes fumo{15%{opacity:.5}100%{opacity:0;transform:translate(26px,-60px) scale(2.2)}}
+.treno{animation:viaggio 26s linear infinite;animation-delay:-3s}
+@keyframes viaggio{0%{transform:translateX(-440px)}55%,100%{transform:translateX(100vw)}}
+.luna{width:130px;height:130px;top:5%;right:9%;background:radial-gradient(circle at 70% 65%,#e6d391 0 9%,transparent 10%),radial-gradient(circle at 40% 75%,#eadb9f 0 6%,transparent 7%),radial-gradient(circle at 35% 35%,#fffdf0,#f6e6a8)}
+.volo{position:absolute;left:0;top:0;width:230px;animation:vola 26s linear infinite;animation-delay:-17s}
+.ombra{width:230px;display:block;filter:brightness(.22) drop-shadow(0 0 3px #fff6c8)}
+@keyframes vola{0%,45%{transform:translate(-260px,22vh) rotate(-9deg)}72%{transform:translate(45vw,11vh) rotate(-7deg)}87%{transform:translate(calc(91vw - 200px),7vh) rotate(-5deg)}100%{transform:translate(115vw,0) rotate(-10deg)}}
+.scia b{position:absolute;color:#ffe9a0;font-size:12px;text-shadow:0 0 8px #ffd54a;animation:luce .7s ease-in-out infinite alternate}
+.musica{position:fixed;left:12px;top:12px;z-index:4;margin:0;font-size:14px;padding:9px 15px;background:#fff4d6;color:#7d0a14;box-shadow:0 3px 10px #0008}
+.palco{position:fixed;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;overflow:hidden;background:radial-gradient(circle at 50% 48%,#25437ef2,#050a1cfa 70%);color:#fff4d6;animation:buio .5s ease-out}
+@keyframes buio{from{opacity:0}}
+.raggi{position:absolute;left:50%;top:50%;width:180vmax;height:180vmax;margin:-90vmax;border-radius:50%;background:repeating-conic-gradient(#ffe39a2e 0 7deg,transparent 7deg 18deg);-webkit-mask:radial-gradient(closest-side,#000,transparent 75%);mask:radial-gradient(closest-side,#000,transparent 75%);opacity:0;pointer-events:none;animation:gira 30s linear infinite}
+.aperto .raggi{opacity:1;transition:opacity .8s}@keyframes gira{to{transform:rotate(360deg)}}
+.palco p{position:relative;font:italic 22px Georgia,serif;margin:8px}
+.palco .pacco{transform-origin:50% 100%;scale:1.7;margin:70px auto}
+.biglietto{position:relative;width:100%;max-width:520px;text-align:center;color:#4a2b0c;padding:30px 24px 22px;border-radius:18px;background:linear-gradient(135deg,#fff3c4,#f1cd6c 35%,#fff0b8 55%,#d6a93f);box-shadow:0 0 0 3px #8f6a1e,inset 0 0 0 7px #fff7da,inset 0 0 0 9px #b48a2c,0 0 70px #ffd36b88;animation:biglietto .8s cubic-bezier(.2,1.5,.4,1)}
+@keyframes biglietto{from{transform:translateY(80px) scale(.3) rotate(-8deg);opacity:0}}
+.biglietto p{font-size:19px}.biglietto .big{background:none;border:0;border-block:1px solid #8f6a1e;border-radius:0;padding:18px 4px;margin:14px 14px;color:#8d0b17}
+.biglietto .nota{color:#5c431b}
+.coriandolo{z-index:6}
+.compatto .scena,.compatto .budget{display:none}.compatto .firma{font-size:20px}.compatto h1{font-size:28px}
+@media(min-width:601px){.compatto .scena,.compatto .budget{display:flex}.compatto .budget{display:inline-block}.compatto .firma{font-size:28px}.compatto h1{font-size:clamp(29px,6vw,44px)}}
+@media(max-height:850px){.paese{height:230px}.villaggio{height:190px}}
+@media(max-width:600px){body{padding-top:62px}.agrifoglio{width:76px;top:-22px}.a1{left:-10px}.a2{right:-10px}.paese{height:190px}.villaggio{height:150px;bottom:20px}.luna{width:54px;height:54px;top:10px}.volo,.ombra{width:130px}.treno{animation-duration:18s}@keyframes viaggio{0%{transform:translateX(-280px)}60%,100%{transform:translateX(100vw)}}.volo{animation-duration:18s;animation-delay:-11s}@keyframes vola{0%,50%{transform:translate(-160px,40px) rotate(-8deg)}100%{transform:translate(115vw,0) rotate(-8deg)}}.firma::before,.firma::after{width:24px}.palco .pacco{scale:1.35}}
+@media(prefers-reduced-motion:reduce){.volo,.fumo{display:none}.finestra,.raggi,.biglietto{animation:none}}
 </style></head><body><svg width="0" height="0" style="position:absolute"><defs>
 <radialGradient id="pelle" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#ffe0c7"/><stop offset="1" stop-color="#e5a582"/></radialGradient>
 <radialGradient id="barba" cx=".5" cy=".25" r=".85"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f1f4f8"/><stop offset="1" stop-color="#bcc8d6"/></radialGradient>
 <linearGradient id="rosso" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4a4a"/><stop offset="1" stop-color="#8c0712"/></linearGradient>
 <linearGradient id="oro" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0ad"/><stop offset="1" stop-color="#b98416"/></linearGradient>
 <linearGradient id="verde" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#37b57a"/><stop offset="1" stop-color="#0c5236"/></linearGradient>
-</defs></svg><div class="cielo" aria-hidden="true"><div class="luna"></div></div>
-<div class="paese" aria-hidden="true">
+</defs></svg><div class="cielo" aria-hidden="true"><div class="luna"></div><div class="volo"><div class="scia"><b style="left:-17px;top:45px;animation-delay:-0.06s">✦</b><b style="left:-34px;top:25px;animation-delay:-0.95s">✦</b><b style="left:-51px;top:21px;animation-delay:-0.58s">✦</b><b style="left:-68px;top:43px;animation-delay:-0.05s">✦</b><b style="left:-85px;top:32px;animation-delay:-0.05s">✦</b><b style="left:-102px;top:26px;animation-delay:-0.29s">✦</b><b style="left:-119px;top:27px;animation-delay:-0.54s">✦</b><b style="left:-136px;top:37px;animation-delay:-0.56s">✦</b><b style="left:-153px;top:29px;animation-delay:-0.10s">✦</b><b style="left:-170px;top:30px;animation-delay:-0.37s">✦</b><b style="left:-187px;top:22px;animation-delay:-0.56s">✦</b><b style="left:-204px;top:31px;animation-delay:-0.50s">✦</b><b style="left:-221px;top:45px;animation-delay:-0.78s">✦</b></div><svg class="ombra" viewBox="0 0 440 116" aria-hidden="true"><path d="M134 66C180 90 200 56 236 62S300 80 343 63" stroke="#5a2d12" stroke-width="2.5" fill="none"/><g class="carico">
+<rect x="22" y="38" width="30" height="34" rx="3" fill="url(#verde)"/><path d="M37 38v34M22 52h30" stroke="url(#oro)" stroke-width="5"/>
+<rect x="44" y="28" width="24" height="40" rx="3" fill="#3d6fd6"/><path d="M56 28v40" stroke="#fff" stroke-width="4"/>
+<path d="M78 66q-4-32 18-32t20 32z" fill="url(#rosso)"/><circle cx="98" cy="30" r="13" fill="url(#pelle)"/>
+<path d="M85 33q0 22 14 22t14-22q-14 9-28 0z" fill="#fff"/><path d="M85 24q3-24 27-12l8 12-12-3-1 4z" fill="url(#rosso)"/><rect x="83" y="19" width="28" height="7" rx="3.5" fill="#fff"/><circle cx="121" cy="25" r="5" fill="#fff"/>
+<circle cx="102" cy="29" r="2" fill="#26313f"/><circle cx="110" cy="33" r="3.5" fill="#e88b72"/>
+<path d="M8 40q14 0 16 20h92q4-16 20-16-4 8-2 20-4 28-34 28H40Q10 90 8 40z" fill="url(#rosso)" stroke="url(#oro)" stroke-width="4"/>
+<path d="M30 74q30 12 76 0" stroke="url(#oro)" stroke-width="3" fill="none"/>
+<g stroke="url(#oro)" stroke-width="5" fill="none" stroke-linecap="round"><path d="M42 90v14M96 90v14M14 105h120q22 0 20-17-12-3-11 7"/></g></g><g transform="translate(180 0)"><g class="trotto" style="animation-delay:0s">
+<g stroke="#7a4a24" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"><g class="gamba lontana" style="animation-delay:-0.3s"><path d="M16 74l-2 17 3 17" /><path d="M17 108h5" stroke="#2b1708"/></g><g class="gamba lontana" style="animation-delay:0s"><path d="M54 74l-2 17 3 17" /><path d="M55 108h5" stroke="#2b1708"/></g><g class="gamba " style="animation-delay:0s"><path d="M24 74l-2 17 3 17" /><path d="M25 108h5" stroke="#2b1708"/></g><g class="gamba " style="animation-delay:-0.3s"><path d="M62 74l-2 17 3 17" /><path d="M63 108h5" stroke="#2b1708"/></g></g>
+<ellipse cx="40" cy="68" rx="32" ry="17" fill="#a4662f"/><ellipse cx="42" cy="76" rx="22" ry="8" fill="#c98f55"/><path d="M10 60q-11-6-6-14 8 2 12 11z" fill="#f4e3c8"/>
+<path d="M56 66L68 36l17 4-9 33z" fill="#a4662f"/>
+<g stroke="#e8c98f" stroke-width="3.5" stroke-linecap="round" fill="none"><path d="M74 30C70 14 60 14 59 6M68 17l-10 1M64 12l3-10"/><path d="M82 30c2-14 13-15 14-25M89 19l11-1M93 12l-4-10"/></g>
+<ellipse cx="83" cy="40" rx="17" ry="12" transform="rotate(18 83 40)" fill="#b57438"/><path d="M71 33l-9-8 14 2z" fill="#a4662f"/>
+<circle cx="84" cy="36" r="2.4" fill="#1d120a"/><circle cx="98" cy="46" r="5" fill="#2b1708" class=""/>
+<path d="M60 54q10 10 20 5" stroke="#c1121f" stroke-width="5" fill="none"/><circle cx="71" cy="63" r="4" fill="url(#oro)"/></g></g><g transform="translate(288 0)"><g class="trotto" style="animation-delay:-0.15s">
+<g stroke="#7a4a24" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"><g class="gamba lontana" style="animation-delay:-0.44999999999999996s"><path d="M16 74l-2 17 3 17" /><path d="M17 108h5" stroke="#2b1708"/></g><g class="gamba lontana" style="animation-delay:-0.15s"><path d="M54 74l-2 17 3 17" /><path d="M55 108h5" stroke="#2b1708"/></g><g class="gamba " style="animation-delay:-0.15s"><path d="M24 74l-2 17 3 17" /><path d="M25 108h5" stroke="#2b1708"/></g><g class="gamba " style="animation-delay:-0.44999999999999996s"><path d="M62 74l-2 17 3 17" /><path d="M63 108h5" stroke="#2b1708"/></g></g>
+<ellipse cx="40" cy="68" rx="32" ry="17" fill="#a4662f"/><ellipse cx="42" cy="76" rx="22" ry="8" fill="#c98f55"/><path d="M10 60q-11-6-6-14 8 2 12 11z" fill="#f4e3c8"/>
+<path d="M56 66L68 36l17 4-9 33z" fill="#a4662f"/>
+<g stroke="#e8c98f" stroke-width="3.5" stroke-linecap="round" fill="none"><path d="M74 30C70 14 60 14 59 6M68 17l-10 1M64 12l3-10"/><path d="M82 30c2-14 13-15 14-25M89 19l11-1M93 12l-4-10"/></g>
+<ellipse cx="83" cy="40" rx="17" ry="12" transform="rotate(18 83 40)" fill="#b57438"/><path d="M71 33l-9-8 14 2z" fill="#a4662f"/>
+<circle cx="84" cy="36" r="2.4" fill="#1d120a"/><circle cx="98" cy="46" r="5" fill="#ff2d2d" class="naso"/>
+<path d="M60 54q10 10 20 5" stroke="#c1121f" stroke-width="5" fill="none"/><circle cx="71" cy="63" r="4" fill="url(#oro)"/></g></g></svg></div></div>
+<div class="paese" aria-hidden="true"><svg class="villaggio" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMax slice"><path d="M0 300V210L110 95 L230 190 L390 60 L540 200 L700 110 L840 185 L1010 50 L1130 170 L1200 210V300z" fill="#1c3566"/><path d="M0 300V250L70 190 L200 245 L300 150 L470 250 L650 175 L780 245 L940 140 L1100 245 L1200 250V300z" fill="#28477c"/><rect x="238" y="187" width="13" height="26" fill="#5b3a35"/><circle class="fumo" style="animation-delay:-0.0s" cx="245" cy="185" r="7"/><circle class="fumo" style="animation-delay:-1.3s" cx="245" cy="185" r="7"/><circle class="fumo" style="animation-delay:-2.6s" cx="245" cy="185" r="7"/><rect x="190" y="215" width="72" height="85" fill="#8a2f35"/><path d="M178 218L226.0 183L274 218z" fill="#eef6ff"/><path d="M178 218H274" stroke="#b9cde6" stroke-width="4"/><rect class="finestra" style="animation-delay:-1.3s" x="200" y="229" width="14" height="16" rx="2"/><rect class="finestra" style="animation-delay:-0.6s" x="238" y="229" width="14" height="16" rx="2"/><path d="M217.0 300v-18q9-11 18 0v18z" fill="#ffcf66"/><rect x="321" y="204" width="13" height="26" fill="#5b3a35"/><rect x="285" y="232" width="60" height="68" fill="#2f5d63"/><path d="M273 235L315.0 200L357 235z" fill="#eef6ff"/><path d="M273 235H357" stroke="#b9cde6" stroke-width="4"/><rect class="finestra" style="animation-delay:-2.6s" x="295" y="246" width="14" height="16" rx="2"/><rect class="finestra" style="animation-delay:-0.3s" x="321" y="246" width="14" height="16" rx="2"/><path d="M306.0 300v-18q9-11 18 0v18z" fill="#ffcf66"/><rect x="441" y="177" width="13" height="26" fill="#5b3a35"/><circle class="fumo" style="animation-delay:-0.8s" cx="448" cy="175" r="7"/><circle class="fumo" style="animation-delay:-2.1s" cx="448" cy="175" r="7"/><circle class="fumo" style="animation-delay:-3.4s" cx="448" cy="175" r="7"/><rect x="385" y="205" width="80" height="95" fill="#7a4b2a"/><path d="M373 208L425.0 173L477 208z" fill="#eef6ff"/><path d="M373 208H477" stroke="#b9cde6" stroke-width="4"/><rect class="finestra" style="animation-delay:-2.1s" x="395" y="219" width="14" height="16" rx="2"/><rect class="finestra" style="animation-delay:-1.5s" x="441" y="219" width="14" height="16" rx="2"/><path d="M416.0 300v-18q9-11 18 0v18z" fill="#ffcf66"/><rect x="777" y="194" width="13" height="26" fill="#5b3a35"/><rect x="735" y="222" width="66" height="78" fill="#2f4d7a"/><path d="M723 225L768.0 190L813 225z" fill="#eef6ff"/><path d="M723 225H813" stroke="#b9cde6" stroke-width="4"/><rect class="finestra" style="animation-delay:-0.2s" x="745" y="236" width="14" height="16" rx="2"/><rect class="finestra" style="animation-delay:-2.0s" x="777" y="236" width="14" height="16" rx="2"/><path d="M759.0 300v-18q9-11 18 0v18z" fill="#ffcf66"/><rect x="884" y="172" width="13" height="26" fill="#5b3a35"/><circle class="fumo" style="animation-delay:-1.6s" cx="891" cy="170" r="7"/><circle class="fumo" style="animation-delay:-2.9s" cx="891" cy="170" r="7"/><circle class="fumo" style="animation-delay:-4.2s" cx="891" cy="170" r="7"/><rect x="830" y="200" width="78" height="100" fill="#8a2f35"/><path d="M818 203L869.0 168L920 203z" fill="#eef6ff"/><path d="M818 203H920" stroke="#b9cde6" stroke-width="4"/><rect class="finestra" style="animation-delay:-0.1s" x="840" y="214" width="14" height="16" rx="2"/><rect class="finestra" style="animation-delay:-1.7s" x="884" y="214" width="14" height="16" rx="2"/><path d="M860.0 300v-18q9-11 18 0v18z" fill="#ffcf66"/><rect x="973" y="202" width="13" height="26" fill="#5b3a35"/><rect x="935" y="230" width="62" height="70" fill="#4d6b3c"/><path d="M923 233L966.0 198L1009 233z" fill="#eef6ff"/><path d="M923 233H1009" stroke="#b9cde6" stroke-width="4"/><rect class="finestra" style="animation-delay:-0.3s" x="945" y="244" width="14" height="16" rx="2"/><rect class="finestra" style="animation-delay:-0.4s" x="973" y="244" width="14" height="16" rx="2"/><path d="M957.0 300v-18q9-11 18 0v18z" fill="#ffcf66"/><rect x="560" y="196" width="80" height="104" fill="#a8825a"/><rect x="585" y="140" width="30" height="60" fill="#b99168"/><path d="M578 142L600 92L622 142z" fill="#eef6ff"/><path d="M600 94V74M591 82h18" stroke="#ffd54a" stroke-width="3"/><path d="M548 198L600 168L652 198z" fill="#eef6ff"/><circle class="finestra" cx="600" cy="162" r="9"/><path class="finestra" d="M573 262v-30q8-12 16 0v30zM611 262v-30q8-12 16 0v30z"/><path d="M590 300v-26q10-14 20 0v26z" fill="#ffcf66"/></svg>
 <svg class="colline" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="M0 90Q200 20 420 80T850 70t350 5v85H0z" fill="#9fb8d6"/><path d="M0 125q250-45 520-8t680-17v60H0z" fill="#eef6ff"/></svg>
 <svg class="bosco sx" viewBox="0 0 200 160"><g transform="translate(52 138) scale(1.15)"><rect x="-5" y="0" width="10" height="16" fill="#5a3418"/><path d="M0-92L-26-52h12L-34-24h13L-42 4h84L21-24h13L14-52h12z" fill="#0f4a33"/><path d="M0-92l-14 22q14 9 28 0z" fill="#eef6ff"/>
 <g class="palline"><circle cx="-10" cy="-48" r="3.5" fill="#ffd54a"/><circle cx="12" cy="-28" r="3.5" fill="#ff5a5a"/><circle cx="-18" cy="-12" r="3.5" fill="#62c8ff"/></g><path d="M0-106l3 8h9l-7 5 3 9-8-5-8 5 3-9-7-5h9z" fill="#ffd54a"/></g><g transform="translate(135 140) scale(0.8)"><rect x="-5" y="0" width="10" height="16" fill="#5a3418"/><path d="M0-92L-26-52h12L-34-24h13L-42 4h84L21-24h13L14-52h12z" fill="#0f4a33"/><path d="M0-92l-14 22q14 9 28 0z" fill="#eef6ff"/>
@@ -107,7 +165,7 @@ body{background:linear-gradient(#050b24,#0e2455 55%,#2b4c80) fixed;padding-botto
 <g stroke="#e8c98f" stroke-width="3.5" stroke-linecap="round" fill="none"><path d="M74 30C70 14 60 14 59 6M68 17l-10 1M64 12l3-10"/><path d="M82 30c2-14 13-15 14-25M89 19l11-1M93 12l-4-10"/></g>
 <ellipse cx="83" cy="40" rx="17" ry="12" transform="rotate(18 83 40)" fill="#b57438"/><path d="M71 33l-9-8 14 2z" fill="#a4662f"/>
 <circle cx="84" cy="36" r="2.4" fill="#1d120a"/><circle cx="98" cy="46" r="5" fill="#ff2d2d" class="naso"/>
-<path d="M60 54q10 10 20 5" stroke="#c1121f" stroke-width="5" fill="none"/><circle cx="71" cy="63" r="4" fill="url(#oro)"/></g></g></svg></div><main><header><div class="luci"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="scena"><svg class="regalo r1" viewBox="0 0 100 110" aria-hidden="true"><ellipse cx="50" cy="103" rx="43" ry="5" opacity=".25"/>
+<path d="M60 54q10 10 20 5" stroke="#c1121f" stroke-width="5" fill="none"/><circle cx="71" cy="63" r="4" fill="url(#oro)"/></g></g></svg></div><div class="cornice"><svg class="agrifoglio a1" viewBox="-80 -50 160 100" aria-hidden="true"><g fill="url(#verde)" stroke="#0a3d28" stroke-width="2"><path d="M0 0C8-16 20-10 24-20C30-10 42-14 46-4C58-6 60 2 72 0C60 8 58 16 46 12C40 22 30 14 24 24C18 12 6 16 0 0z" transform="rotate(8)"/><path d="M0 0C8-16 20-10 24-20C30-10 42-14 46-4C58-6 60 2 72 0C60 8 58 16 46 12C40 22 30 14 24 24C18 12 6 16 0 0z" transform="rotate(172)"/><path d="M0 0C8-16 20-10 24-20C30-10 42-14 46-4C58-6 60 2 72 0C60 8 58 16 46 12C40 22 30 14 24 24C18 12 6 16 0 0z" transform="rotate(95) scale(.75)"/></g><g fill="url(#rosso)"><circle cx="-8" cy="2" r="9"/><circle cx="9" cy="-4" r="9"/><circle cx="4" cy="12" r="9"/></g><g fill="#fff" opacity=".7"><circle cx="-11" cy="-1" r="2.5"/><circle cx="6" cy="-7" r="2.5"/><circle cx="1" cy="9" r="2.5"/></g></svg><svg class="agrifoglio a2" viewBox="-80 -50 160 100" aria-hidden="true"><g fill="url(#verde)" stroke="#0a3d28" stroke-width="2"><path d="M0 0C8-16 20-10 24-20C30-10 42-14 46-4C58-6 60 2 72 0C60 8 58 16 46 12C40 22 30 14 24 24C18 12 6 16 0 0z" transform="rotate(8)"/><path d="M0 0C8-16 20-10 24-20C30-10 42-14 46-4C58-6 60 2 72 0C60 8 58 16 46 12C40 22 30 14 24 24C18 12 6 16 0 0z" transform="rotate(172)"/><path d="M0 0C8-16 20-10 24-20C30-10 42-14 46-4C58-6 60 2 72 0C60 8 58 16 46 12C40 22 30 14 24 24C18 12 6 16 0 0z" transform="rotate(95) scale(.75)"/></g><g fill="url(#rosso)"><circle cx="-8" cy="2" r="9"/><circle cx="9" cy="-4" r="9"/><circle cx="4" cy="12" r="9"/></g><g fill="#fff" opacity=".7"><circle cx="-11" cy="-1" r="2.5"/><circle cx="6" cy="-7" r="2.5"/><circle cx="1" cy="9" r="2.5"/></g></svg><main><header><div class="luci"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="scena"><svg class="regalo r1" viewBox="0 0 100 110" aria-hidden="true"><ellipse cx="50" cy="103" rx="43" ry="5" opacity=".25"/>
 <rect x="14" y="48" width="72" height="54" rx="4" fill="url(#verde)"/><rect x="8" y="34" width="84" height="19" rx="4" fill="url(#verde)"/><rect x="14" y="53" width="72" height="5" opacity=".22"/>
 <rect x="43" y="34" width="14" height="68" fill="url(#oro)"/><path d="M50 34C30 4 8 18 24 31q9 6 26 3C67 37 90 28 76 17 62 8 54 24 50 34z" fill="url(#oro)"/>
 <path d="M45 29C32 16 21 19 29 26zM55 29c13-13 24-10 16-3z" fill="#0003"/><circle cx="50" cy="33" r="7" fill="url(#oro)" stroke="#0002"/></svg><svg class="babbo" viewBox="0 0 200 210" role="img" aria-label="Babbo Natale">
@@ -125,7 +183,7 @@ body{background:linear-gradient(#050b24,#0e2455 55%,#2b4c80) fixed;padding-botto
 </svg><svg class="regalo r2" viewBox="0 0 100 110" aria-hidden="true"><ellipse cx="50" cy="103" rx="43" ry="5" opacity=".25"/>
 <rect x="14" y="48" width="72" height="54" rx="4" fill="url(#oro)"/><rect x="8" y="34" width="84" height="19" rx="4" fill="url(#oro)"/><rect x="14" y="53" width="72" height="5" opacity=".22"/>
 <rect x="43" y="34" width="14" height="68" fill="url(#rosso)"/><path d="M50 34C30 4 8 18 24 31q9 6 26 3C67 37 90 28 76 17 62 8 54 24 50 34z" fill="url(#rosso)"/>
-<path d="M45 29C32 16 21 19 29 26zM55 29c13-13 24-10 16-3z" fill="#0003"/><circle cx="50" cy="33" r="7" fill="url(#rosso)" stroke="#0002"/></svg></div><h1>Babbo Natale Segreto</h1><div class="firma">By Flavio</div><br><div class="budget">Budget: 15 € · massimo 20 €</div></header><div id="app"></div></main>
+<path d="M45 29C32 16 21 19 29 26zM55 29c13-13 24-10 16-3z" fill="#0003"/><circle cx="50" cy="33" r="7" fill="url(#rosso)" stroke="#0002"/></svg></div><h1>Babbo Natale Segreto</h1><div class="firma">By Flavio</div><br><div class="budget">Budget: 15 € · massimo 20 €</div></header><div id="app"></div></main></div>
 <script>
 const URL_API='https://zcykviesiinezzuyoprn.supabase.co/rest/v1/rpc/';
 const CHIAVE='sb_publishable_NCMbolO_pS9v6EWQsoGEbw_c11nlTUL';
@@ -138,7 +196,7 @@ async function api(fn,dati){
   const j=await r.json(); if(j&&j.errore) throw new Error(j.errore); return j;
 }
 function messaggio(e){return e instanceof TypeError?'Connessione assente: controlla internet.':e.message}
-function pulisci(){clearTimeout(timer);app.innerHTML=''}
+function pulisci(compatto=true){clearTimeout(timer);app.innerHTML='';document.querySelectorAll('.palco').forEach(p=>p.remove());document.body.classList.toggle('compatto',compatto)}
 // blocca i doppi clic mentre aspetta il server
 function azione(testo,fn,cls){const b=el('button',testo,async()=>{b.disabled=true;try{await fn()}catch(e){alert(messaggio(e))}b.disabled=false},cls);return b}
 function campo(etichetta,pin){
@@ -149,12 +207,12 @@ function campo(etichetta,pin){
 function invio(i,b){i.onkeydown=e=>{if(e.key==='Enter')b.click()}}
 
 async function inizio(){
-  PW='';S=[];pulisci(); el('p','Caricamento...');
+  PW='';S=[];pulisci(false); el('p','Caricamento...');
   let pronto,nomi;
   try{pronto=await api('bns_pronto'); if(pronto) nomi=await api('bns_nomi')}
   catch(e){pulisci();el('p','Non riesco a collegarmi.');azione('Riprova',inizio);return}
   if(!pronto) return apertura();
-  pulisci();
+  pulisci(false);
   el('p','Scopri a chi devi fare il regalo');
   const sel=el('select');sel.setAttribute('aria-label','Il tuo nome');
   sel.add(new Option('Scegli il tuo nome...',''));
@@ -180,17 +238,22 @@ function accesso(x){
   p1.focus();
 }
 function risultato(io,destinatario){
-  pulisci();
-  el('p','Stiamo aprendo il tuo regalo...');
-  const pacco=el('div',null,null,'pacco');pacco.appendChild(document.createElement('b'));pacco.appendChild(document.createElement('i'));
+  pulisci(); window.scrollTo(0,0);
+  const palco=document.createElement('div');palco.className='palco';document.body.appendChild(palco);
+  const nodo=(dove,tag,testo,cls)=>{const e=document.createElement(tag);e.textContent=testo||'';if(cls)e.className=cls;dove.appendChild(e);return e};
+  nodo(palco,'div',null,'raggi');
+  const attesa=nodo(palco,'p','Stiamo aprendo il tuo regalo...');
+  const pacco=nodo(palco,'div',null,'pacco');nodo(pacco,'b');nodo(pacco,'i');
   timer=setTimeout(()=>{
-    pulisci(); coriandoli();
-    el('p',io+', devi fare il regalo a');
-    el('div',destinatario,null,'big');
-    el('p','Acqua in bocca! La schermata si chiude da sola dopo un minuto.',null,'nota');
-    el('button','Ho letto, esci',inizio);
+    attesa.remove();pacco.remove();palco.classList.add('aperto');coriandoli();suonaMagia();
+    const c=nodo(palco,'div',null,'biglietto');c.setAttribute('role','status');
+    nodo(c,'p',io+', devi fare il regalo a');
+    nodo(c,'div',destinatario,'big');
+    nodo(c,'p','Budget: 15 € · massimo 20 €');
+    nodo(c,'p','Acqua in bocca! Si chiude da solo dopo un minuto.','nota');
+    nodo(c,'button','Ho letto, esci').onclick=inizio;
     timer=setTimeout(inizio,60000);
-  },1700);
+  },1800);
 }
 function coriandoli(){
   if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
@@ -245,6 +308,31 @@ function ricomincia(){
   azione('Sì, rifai l\'estrazione',async()=>{await api('bns_ricomincia',{pw:p.value});await carica();riepilogo()});
   el('button','No, torna indietro',riepilogo);
 }
+// musica: melodia originale suonata dal browser, spenta all'apertura
+let audio=null, suona=false, ciclo=null;
+const bMus=document.createElement('button');bMus.className='musica';bMus.textContent='♪ Musica: no';bMus.setAttribute('aria-pressed','false');document.body.appendChild(bMus);
+function nota(midi,quando,durata,volume){
+  const f=440*Math.pow(2,(midi-69)/12);
+  [[1,1],[2.76,.22]].forEach(([m,v])=>{const o=audio.createOscillator(),g=audio.createGain();o.frequency.value=f*m;
+    g.gain.setValueAtTime(0,quando);g.gain.linearRampToValueAtTime(volume*v,quando+.01);g.gain.exponentialRampToValueAtTime(.0001,quando+durata/m);
+    o.connect(g).connect(audio.destination);o.start(quando);o.stop(quando+durata)});
+}
+function giro(){
+  const q=.34, t=audio.currentTime+.06;
+  const melodia=[74,78,81,79,78,76,74,71,74,76,81,78,79,83,81,78,76,73,76,78,81,86,85,81,83,79,76,81,78,76,74,0,0,74,0,0];
+  const bassi=[50,45,47,45,43,50,45,50,43,45,50,50];
+  melodia.forEach((m,i)=>{if(m)nota(m,t+i*q,1.2,.07)});
+  bassi.forEach((m,i)=>{nota(m,t+i*3*q,1.1,.05);nota(m+19,t+(i*3+1)*q,.5,.018);nota(m+19,t+(i*3+2)*q,.5,.018)});
+  ciclo=setTimeout(giro,melodia.length*q*1000);
+}
+function suonaMagia(){if(suona)[86,90,93,98].forEach((m,i)=>nota(m,audio.currentTime+i*.09,1.4,.08))}
+function musicaOn(si){
+  suona=si;clearTimeout(ciclo);if(audio){audio.close();audio=null}
+  if(si){audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();giro()}
+  bMus.textContent=si?'♪ Musica: sì':'♪ Musica: no';bMus.setAttribute('aria-pressed',String(si));
+}
+bMus.onclick=()=>musicaOn(!suona);
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&suona)musicaOn(false)});
 inizio();
 for(let i=0;i<45;i++){const f=document.createElement('div');f.className='neve';f.textContent='❄';
 f.style.cssText=`left:${Math.random()*100}vw;font-size:${8+Math.random()*18}px;opacity:${.25+Math.random()*.6};animation-duration:${7+Math.random()*10}s;animation-delay:-${Math.random()*17}s`;
