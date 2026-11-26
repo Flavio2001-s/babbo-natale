@@ -172,6 +172,47 @@ select,input,input.pin{height:54px}
 .paese{height:200px}.villaggio{height:158px;bottom:18px}.colline{height:76px}.bosco{width:110px;height:88px}.treno{width:260px}
 @keyframes viaggio{0%{transform:translateX(-270px)}60%,100%{transform:translateX(100vw)}}
 }
+/* v6 */
+#app button.scelta{background:#fff;color:#2b1d16;border:2px solid #d4a843;box-shadow:0 4px 0 #d4a843;width:100%;max-width:340px}
+.velo{position:fixed;inset:0;z-index:7;display:flex;align-items:center;justify-content:center;padding:16px;background:#050a1ccc;animation:buio .25s}
+.foglio{display:flex;flex-direction:column;width:100%;max-width:420px;height:min(620px,100%);border-radius:22px;overflow:hidden;background:#fff9ef;box-shadow:0 0 0 3px #d4a843,0 20px 60px #000a}
+.testa{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:linear-gradient(135deg,#c41c27,#7d0a14);color:#ffeab0;font:700 22px Georgia,serif}
+.testa .chiudi{margin:0;width:38px;height:38px;padding:0;background:#ffffff22;box-shadow:none;font-size:17px}
+.foglio .cerca{flex:none;width:calc(100% - 24px);max-width:none;margin:12px;height:48px;font-size:17px;display:block}
+.lista{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:0 12px 12px;text-align:left}
+.lista .voce{display:block;width:100%;margin:0;padding:14px 8px;text-align:left;background:none;color:#2b1d16;box-shadow:none;border-radius:0;border-bottom:1px solid #eadfc6;font-size:17px}
+.lista .voce:hover,.lista .voce:focus{background:#f9ebc6;transform:none}
+.lista .voce::before{content:"✦";color:#c99a2e;margin-right:10px}
+.palline-pin{display:block;margin:6px auto 2px}.palline-pin>span:first-child{display:block;font-size:14px;color:#7a665c}
+.fila{position:relative;display:flex;justify-content:center;gap:18px;width:240px;margin:0 auto;padding:14px 0 6px}
+.fila i{position:relative;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#d9d2c3 55%,#aaa190);box-shadow:0 3px 5px #0004;transition:transform .2s}
+.fila i::before{content:"";position:absolute;left:13px;top:-7px;width:12px;height:9px;border-radius:3px;background:linear-gradient(#fff0ad,#b98416)}
+.fila i.accesa{transform:scale(1.12);background:radial-gradient(circle at 35% 30%,#ffb3ad,#d9202b 55%,#7d0a14);box-shadow:0 0 14px 3px #ffcf4daa}
+.fila i.accesa:nth-child(even){background:radial-gradient(circle at 35% 30%,#b6f5d2,#1f8f5c 55%,#0b4a30)}
+#app .fila input.pin{position:absolute;inset:0;width:100%;max-width:none;height:100%;margin:0;padding:0;border:0;border-radius:14px;background:transparent;color:transparent;caret-color:transparent;font-size:16px;letter-spacing:0}
+.fila:focus-within{outline:2px dashed #d4a843;border-radius:14px}
+.biglietto{margin-top:14px}
+.angolo{position:absolute;color:#8f6a1e;font-size:18px;line-height:1}.s1{left:15px;top:14px}.s2{right:15px;top:14px}.s3{left:15px;bottom:14px}.s4{right:15px;bottom:14px}
+.firma-biglietto{margin-top:6px;font:italic 700 20px "Snell Roundhand","Segoe Script",cursive;color:#7d0a14}
+.sigillo{position:absolute;left:50%;top:-24px;width:48px;height:48px;margin-left:-24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:23px;color:#ffd98a;background:radial-gradient(circle at 35% 30%,#e0434c,#97101c 65%,#620710);box-shadow:0 3px 8px #0007,0 0 0 4px #8d0f1a}
+.conto{width:fit-content;margin:8px auto 0;padding:6px 14px;border:1px solid #f7d879;border-radius:14px;color:#ffeab0;font-weight:700;font-size:15px}.conto small{display:block;font-weight:400}
+.benvenuto,.benvenuto:hover,.benvenuto:active{position:fixed;inset:0;z-index:8;width:100%;height:100%;margin:0;padding:20px;border-radius:0;transform:none;box-shadow:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:44px;background:radial-gradient(circle at 50% 45%,#27468a,#050b24 75%);color:#ffeab0}
+.benvenuto .titolo{font:italic 700 clamp(23px,6.5vw,34px) Georgia,serif}
+.busta{position:relative;display:block;margin-top:24px;width:min(300px,80vw);aspect-ratio:3/2;background:#8d0f1a;border-radius:8px;box-shadow:0 22px 40px #000a;perspective:700px;animation:galleggia 2.6s ease-in-out infinite}
+.busta>span{position:absolute;display:block}
+.lettera{left:7%;right:7%;top:8%;height:80%;z-index:1;padding-top:6%;border-radius:6px;background:#fff6dc;color:#8d0b17;font:700 19px/1.2 Georgia,serif;transition:transform .8s ease .55s}
+.tasca{inset:0;z-index:2;border-radius:8px;background:linear-gradient(#c41c27,#9b101c);clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%)}
+.lembo{left:0;right:0;top:0;height:60%;z-index:3;background:linear-gradient(#e12f3a,#b3141f);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .55s ease,z-index 0s .3s}
+.ceralacca{left:50%;top:60%;z-index:4;width:62px;height:62px;margin:-34px 0 0 -31px;border-radius:50%;line-height:62px;font-size:30px;color:#6e4a06;background:radial-gradient(circle at 35% 30%,#fff3b8,#e0ae38 60%,#9c6f12);box-shadow:0 4px 8px #0007;transition:opacity .25s,transform .25s}
+.invito{font:600 18px system-ui,sans-serif;animation:luce 1s ease-in-out infinite alternate}
+@keyframes galleggia{50%{translate:0 -10px}}
+.apri .lembo{transform:rotateX(180deg);z-index:0}.apri .ceralacca{opacity:0;transform:scale(1.8)}.apri .lettera{transform:translateY(-78%)}.apri .invito{visibility:hidden}
+.benvenuto.apri{animation:svanisce .5s ease 1.4s forwards;pointer-events:none}@keyframes svanisce{to{opacity:0}}
+.scintilla{position:fixed;z-index:9;pointer-events:none;color:#ffe58a;text-shadow:0 0 8px #ffc93c;font-size:15px;animation:scintilla .7s ease-out forwards}
+@keyframes scintilla{to{transform:translate(var(--x),var(--y)) rotate(200deg) scale(.2);opacity:0}}
+@media(max-width:600px){.biglietto button,#app .biglietto button{width:calc(100% - 36px)}.palline-pin>span:first-child{margin-bottom:2px}.compatto .conto{display:none}.conto{font-size:13px;padding:4px 10px}#app .scelta{height:52px}.fila i{width:34px;height:34px}.firma-biglietto{font-size:18px}.fila{padding:12px 0 4px}}
+@media(max-width:600px) and (max-height:600px){.firma-biglietto{display:none}.palline-pin>span:first-child{font-size:12px}.fila{padding:10px 0 2px}.fila i{width:28px;height:28px}#app .palline-pin{margin-top:2px}}
+@media(prefers-reduced-motion:reduce){.busta,.invito{animation:none}}
 </style></head><body><svg width="0" height="0" style="position:absolute"><defs>
 <radialGradient id="pelle" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#ffe0c7"/><stop offset="1" stop-color="#e5a582"/></radialGradient>
 <radialGradient id="barba" cx=".5" cy=".25" r=".85"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f1f4f8"/><stop offset="1" stop-color="#bcc8d6"/></radialGradient>
@@ -261,13 +302,18 @@ async function api(fn,dati){
   const j=await r.json(); if(j&&j.errore) throw new Error(j.errore); return j;
 }
 function messaggio(e){return e instanceof TypeError?'Connessione assente: controlla internet.':e.message}
-function pulisci(compatto=true){clearTimeout(timer);app.innerHTML='';document.querySelectorAll('.palco').forEach(p=>p.remove());document.body.classList.toggle('compatto',compatto)}
+function pulisci(compatto=true){clearTimeout(timer);app.innerHTML='';document.querySelectorAll('.palco,.velo').forEach(p=>p.remove());document.body.classList.toggle('compatto',compatto)}
 // blocca i doppi clic mentre aspetta il server
 function azione(testo,fn,cls){const b=el('button',testo,async()=>{b.disabled=true;try{await fn()}catch(e){alert(messaggio(e))}b.disabled=false},cls);return b}
 function campo(etichetta,pin){
-  const i=el('input');i.type='password';i.placeholder=etichetta;i.autocomplete='off';i.setAttribute('aria-label',etichetta);
-  if(pin){i.inputMode='numeric';i.maxLength=4;i.className='pin';i.oninput=()=>i.value=i.value.replace(/[^0-9]/g,'')}
-  el('br');return i;
+  const i=document.createElement('input');i.type='password';i.autocomplete='off';i.setAttribute('aria-label',etichetta);
+  if(!pin){i.placeholder=etichetta;app.appendChild(i);el('br');return i}
+  const box=el('label',null,null,'palline-pin'), titolo=document.createElement('span');titolo.textContent=etichetta;box.appendChild(titolo);
+  const fila=document.createElement('span');fila.className='fila';box.appendChild(fila);
+  const palle=[0,1,2,3].map(()=>fila.appendChild(document.createElement('i')));
+  i.inputMode='numeric';i.maxLength=4;i.className='pin';fila.appendChild(i);
+  i.oninput=()=>{i.value=i.value.replace(/[^0-9]/g,'').slice(0,4);palle.forEach((p,k)=>p.classList.toggle('accesa',k<i.value.length))};
+  return i;
 }
 function invio(i,b){i.onkeydown=e=>{if(e.key==='Enter')b.click()}}
 
@@ -279,12 +325,27 @@ async function inizio(){
   if(!pronto) return apertura();
   pulisci(false);
   el('p','Scopri a chi devi fare il regalo');
-  const sel=el('select');sel.setAttribute('aria-label','Il tuo nome');
-  sel.add(new Option('Scegli il tuo nome...',''));
-  nomi.forEach(n=>sel.add(new Option(n.nome,n.id)));
+  el('button','Scegli il tuo nome',()=>scegli(nomi),'scelta');
   el('br');
-  sel.onchange=()=>{const x=nomi.find(n=>n.id==sel.value); if(x) accesso(x)};
   el('button','Area organizzatore',login,'rosso');
+}
+function scegli(nomi){
+  const velo=document.createElement('div');velo.className='velo';
+  velo.innerHTML='<div class="foglio" role="dialog" aria-modal="true" aria-label="Scegli il tuo nome"><div class="testa"><strong>Chi sei?</strong><button type="button" class="chiudi" aria-label="Chiudi">✕</button></div><input type="search" class="cerca" placeholder="Cerca il tuo nome" aria-label="Cerca il tuo nome" autocomplete="off"><div class="lista"></div></div>';
+  document.body.appendChild(velo);
+  const cerca=velo.querySelector('.cerca'), lista=velo.querySelector('.lista');
+  const semplice=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  const riempi=()=>{
+    lista.textContent='';
+    const trovati=nomi.filter(n=>semplice(n.nome).includes(semplice(cerca.value)));
+    trovati.forEach(n=>{const b=document.createElement('button');b.type='button';b.className='voce';b.textContent=n.nome;b.onclick=()=>accesso(n);lista.appendChild(b)});
+    if(!trovati.length){const p=document.createElement('p');p.textContent='Nessun nome trovato';lista.appendChild(p)}
+  };
+  cerca.oninput=riempi;
+  velo.querySelector('.chiudi').onclick=()=>velo.remove();
+  velo.onclick=e=>{if(e.target===velo)velo.remove()};
+  velo.onkeydown=e=>{if(e.key==='Escape')velo.remove()};
+  riempi(); velo.querySelector('.chiudi').focus();
 }
 function accesso(x){
   pulisci();
@@ -321,6 +382,9 @@ function risultato(io,destinatario){
       nodo(c,'p','Budget: 15 € · massimo 20 €');
       nodo(c,'p','Acqua in bocca! Si chiude da solo dopo un minuto.','nota');
       nodo(c,'button','Ho letto, esci').onclick=inizio;
+      nodo(c,'div','By Flavio','firma-biglietto');
+      ['s1','s2','s3','s4'].forEach(k=>nodo(c,'span','❖','angolo '+k));
+      nodo(c,'span','★','sigillo');
       const r=scatola.getBoundingClientRect(), k=c.offsetTop+c.offsetHeight/2;
       const giu=r.top+r.height*.6-k, scala=Math.min(.3,120/c.offsetWidth);
       if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&c.animate){
@@ -429,6 +493,35 @@ bMus.onclick=()=>{suona=!suona;suona?parti():ferma();etichetta()};
 ['click','touchend','keydown'].forEach(t=>document.addEventListener(t,e=>{if(e.target!==bMus)parti()},true));
 document.addEventListener('visibilitychange',()=>{if(document.hidden)ferma()});
 etichetta();
+// conto alla rovescia: resta nascosto finché non c'è la data, es. '2000-01-31T18:00:00+01:00'
+const SCAMBIO=null;
+function conto(){
+  if(!SCAMBIO)return;
+  let box=document.querySelector('.conto');
+  if(!box){box=document.createElement('div');box.className='conto';document.querySelector('header').appendChild(box)}
+  const quando=new Date(SCAMBIO), giorno=d=>Date.parse(d.toLocaleDateString('en-CA',{timeZone:'Europe/Rome'}));
+  const g=Math.round((giorno(quando)-giorno(new Date()))/864e5);
+  const ora=quando.toLocaleString('it-IT',{timeZone:'Europe/Rome',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
+  box.textContent=g>1?'Mancano '+g+' giorni allo scambio dei regali':g===1?'Domani c\'è lo scambio dei regali!':g===0?'Oggi c\'è lo scambio dei regali!':'Buon Natale a tutti!';
+  if(g>=0){const p=document.createElement('small');p.textContent=ora;box.appendChild(p)}
+}
+conto();
+// busta di benvenuto: il primo tocco avvia anche la musica
+(function(){
+  const b=document.createElement('button');b.type='button';b.className='benvenuto';b.setAttribute('aria-label','Tocca per aprire');
+  b.innerHTML='<span class="titolo">C\'è posta dal Polo Nord</span><span class="busta"><span class="lettera">Babbo Natale<br>Segreto</span><span class="tasca"></span><span class="lembo"></span><span class="ceralacca">★</span></span><span class="invito">Tocca per aprire</span>';
+  document.body.appendChild(b);
+  b.onclick=()=>{b.classList.add('apri');setTimeout(()=>b.remove(),1900)};
+})();
+// stelline dorate dove si tocca
+document.addEventListener('pointerdown',e=>{
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  for(let k=0;k<7;k++){const f=document.createElement('span');f.className='scintilla';f.textContent='✦';
+    f.style.left=e.clientX+'px';f.style.top=e.clientY+'px';
+    const ang=k/7*6.283+Math.random(), r=24+Math.random()*30;
+    f.style.setProperty('--x',Math.cos(ang)*r+'px');f.style.setProperty('--y',Math.sin(ang)*r+'px');
+    document.body.appendChild(f);setTimeout(()=>f.remove(),700)}
+},{passive:true});
 inizio();
 for(let i=0;i<45;i++){const f=document.createElement('div');f.className='neve';f.textContent='❄';
 f.style.cssText=`left:${Math.random()*100}vw;font-size:${8+Math.random()*18}px;opacity:${.25+Math.random()*.6};animation-duration:${7+Math.random()*10}s;animation-delay:-${Math.random()*17}s`;
