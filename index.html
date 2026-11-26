@@ -107,6 +107,23 @@ h1{font-family:"Playfair Display",Didot,"Bodoni 72",Georgia,serif;font-size:clam
 @media(max-height:850px){.paese{height:230px}.villaggio{height:190px}}
 @media(max-width:600px){body{padding-top:62px}.agrifoglio{width:76px;top:-22px}.a1{left:-10px}.a2{right:-10px}.paese{height:190px}.villaggio{height:150px;bottom:20px}.luna{width:54px;height:54px;top:10px}.volo,.ombra{width:130px}.treno{animation-duration:18s}@keyframes viaggio{0%{transform:translateX(-280px)}60%,100%{transform:translateX(100vw)}}.volo{animation-duration:18s;animation-delay:-11s}@keyframes vola{0%,50%{transform:translate(-160px,40px) rotate(-8deg)}100%{transform:translate(115vw,0) rotate(-8deg)}}.firma::before,.firma::after{width:24px}.palco .pacco{scale:1.35}}
 @media(prefers-reduced-motion:reduce){.volo,.fumo{display:none}.finestra,.raggi,.biglietto{animation:none}}
+/* pacco da cui esce il biglietto */
+.palco .attesa{position:absolute;top:calc(50% - 170px);left:0;right:0;text-align:center}
+.biglietto{position:relative;z-index:4;animation:none}
+.scatola{position:absolute;left:50%;top:calc(50% - 40px);width:220px;height:170px;margin-left:-110px;z-index:2;transform-origin:50% 100%;animation:trema .4s ease-in-out 4}
+@keyframes trema{20%{transform:rotate(-6deg) scale(1.03)}60%{transform:rotate(6deg) scale(1.06)}}
+.corpo,.coperchio{position:absolute;border-radius:8px;background:linear-gradient(90deg,transparent 41%,#b98416 41%,#fff0ad 50%,#b98416 59%,transparent 59%),linear-gradient(100deg,#ef3b42,#a30b18 70%,#6d0610)}
+.corpo{left:14px;right:14px;bottom:0;height:120px;z-index:2;box-shadow:inset 0 14px 14px -8px #0008,0 18px 25px #0009}
+.dentro{position:absolute;left:18px;right:18px;top:38px;height:26px;border-radius:50%;background:#3d0309}
+.coperchio{left:0;right:0;top:22px;height:40px;z-index:3;box-shadow:0 6px 8px #0006}
+.coperchio::before{content:"";position:absolute;left:68px;top:-32px;width:30px;height:20px;border:10px solid #f3cf5c;border-radius:50% 50% 0 50%;box-shadow:34px 0 0 -10px #f3cf5c}
+.coperchio::after{content:"";position:absolute;left:113px;top:-32px;width:30px;height:20px;border:10px solid #f3cf5c;border-radius:50% 50% 50% 0}
+.bagliore{position:absolute;left:-50px;right:-50px;top:-70px;height:200px;z-index:1;opacity:0;background:radial-gradient(closest-side,#fffbe0,#ffd54a99 45%,transparent)}
+.via .coperchio{animation:salta .9s cubic-bezier(.3,.6,.5,1) forwards}@keyframes salta{to{transform:translate(190px,-230px) rotate(75deg);opacity:0}}
+.via .bagliore{animation:lampo 1s ease-out forwards}@keyframes lampo{30%{opacity:1;transform:scale(1.25)}100%{opacity:.7}}
+.scatola.via{animation:none}
+.scatola.scende{animation:scende 1s ease-in 1s forwards}@keyframes scende{to{transform:translateY(60vh) scale(.8);opacity:0}}
+@media(prefers-reduced-motion:reduce){.scatola{animation:none}}
 </style></head><body><svg width="0" height="0" style="position:absolute"><defs>
 <radialGradient id="pelle" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#ffe0c7"/><stop offset="1" stop-color="#e5a582"/></radialGradient>
 <radialGradient id="barba" cx=".5" cy=".25" r=".85"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f1f4f8"/><stop offset="1" stop-color="#bcc8d6"/></radialGradient>
@@ -242,18 +259,36 @@ function risultato(io,destinatario){
   const palco=document.createElement('div');palco.className='palco';document.body.appendChild(palco);
   const nodo=(dove,tag,testo,cls)=>{const e=document.createElement(tag);e.textContent=testo||'';if(cls)e.className=cls;dove.appendChild(e);return e};
   nodo(palco,'div',null,'raggi');
-  const attesa=nodo(palco,'p','Stiamo aprendo il tuo regalo...');
-  const pacco=nodo(palco,'div',null,'pacco');nodo(pacco,'b');nodo(pacco,'i');
+  const attesa=nodo(palco,'p','Stiamo aprendo il tuo regalo...','attesa');
+  const scatola=nodo(palco,'div',null,'scatola');
+  ['dentro','bagliore','corpo','coperchio'].forEach(c=>nodo(scatola,'div',null,c));
   timer=setTimeout(()=>{
-    attesa.remove();pacco.remove();palco.classList.add('aperto');coriandoli();suonaMagia();
-    const c=nodo(palco,'div',null,'biglietto');c.setAttribute('role','status');
-    nodo(c,'p',io+', devi fare il regalo a');
-    nodo(c,'div',destinatario,'big');
-    nodo(c,'p','Budget: 15 € · massimo 20 €');
-    nodo(c,'p','Acqua in bocca! Si chiude da solo dopo un minuto.','nota');
-    nodo(c,'button','Ho letto, esci').onclick=inizio;
-    timer=setTimeout(inizio,60000);
-  },1800);
+    // 1) salta il coperchio ed esce la luce
+    attesa.remove();scatola.classList.add('via');palco.classList.add('aperto');suonaMagia();
+    timer=setTimeout(()=>{
+      // 2) il biglietto sale dalla scatola
+      const c=nodo(palco,'div',null,'biglietto');c.setAttribute('role','status');
+      nodo(c,'p',io+', devi fare il regalo a');
+      nodo(c,'div',destinatario,'big');
+      nodo(c,'p','Budget: 15 € · massimo 20 €');
+      nodo(c,'p','Acqua in bocca! Si chiude da solo dopo un minuto.','nota');
+      nodo(c,'button','Ho letto, esci').onclick=inizio;
+      const r=scatola.getBoundingClientRect(), k=c.offsetTop+c.offsetHeight/2;
+      const giu=r.top+r.height*.6-k, scala=Math.min(.3,120/c.offsetWidth);
+      if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&c.animate){
+        c.animate([
+          {transform:`translateY(${giu}px) scale(${scala}) rotate(-4deg)`,zIndex:1,offset:0},
+          {transform:`translateY(${giu-190}px) scale(${scala*1.25}) rotate(5deg)`,zIndex:1,offset:.42},
+          {transform:`translateY(${giu-200}px) scale(${scala*1.3}) rotate(5deg)`,zIndex:4,offset:.46},
+          {transform:'translateY(-14px) scale(1.06) rotate(-1deg)',zIndex:4,offset:.85},
+          {transform:'none',zIndex:4,offset:1}
+        ],{duration:2100,easing:'ease-in-out'});
+        scatola.classList.add('scende');
+      } else scatola.remove();
+      setTimeout(()=>{if(c.isConnected){coriandoli();scatola.remove()}},2000);
+      timer=setTimeout(inizio,62000);
+    },450);
+  },1600);
 }
 function coriandoli(){
   if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
