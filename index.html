@@ -373,7 +373,7 @@ function risultato(io,destinatario){
   ['dentro','bagliore','corpo','coperchio'].forEach(c=>nodo(scatola,'div',null,c));
   timer=setTimeout(()=>{
     // 1) salta il coperchio ed esce la luce
-    attesa.remove();scatola.classList.add('via');palco.classList.add('aperto');suonaMagia();
+    attesa.remove();scatola.classList.add('via');palco.classList.add('aperto');
     timer=setTimeout(()=>{
       // 2) il biglietto sale dalla scatola
       const c=nodo(palco,'div',null,'biglietto');c.setAttribute('role','status');
@@ -456,42 +456,52 @@ function ricomincia(){
   el('button','No, torna indietro',riepilogo);
 }
 // musica suonata dal browser, attiva di default
-let audio=null, suona=true, ciclo=null;
+let suona=true, player=null;
 const bMus=document.createElement('button');bMus.className='musica';bMus.textContent='♪ Musica: no';bMus.setAttribute('aria-pressed','false');document.body.appendChild(bMus);
-function nota(midi,quando,durata,volume){
-  const f=440*Math.pow(2,(midi-69)/12);
-  [[1,1],[2.76,.22]].forEach(([m,v])=>{const o=audio.createOscillator(),g=audio.createGain();o.frequency.value=f*m;
-    g.gain.setValueAtTime(0,quando);g.gain.linearRampToValueAtTime(volume*v,quando+.01);g.gain.exponentialRampToValueAtTime(.0001,quando+durata/m);
-    o.connect(g).connect(audio.destination);o.start(quando);o.stop(quando+durata)});
-}
 // Jingle Bells (J. Pierpont, 1857, pubblico dominio): [nota, durata in battiti]
 const C=72,D=74,E=76,F=77,G=79;
 const inizioRit=[[E,1],[E,1],[E,2],[E,1],[E,1],[E,2],[E,1],[G,1],[C,1.5],[D,.5],[E,4],[F,1],[F,1],[F,1.5],[F,.5],[F,1],[E,1],[E,1],[E,.5],[E,.5]];
 const melodia=[...inizioRit,[E,1],[D,1],[D,1],[E,1],[D,2],[G,2],...inizioRit,[G,1],[G,1],[F,1],[D,1],[C,4]];
 const bassi=[48,48,48,48,53,48,50,43,48,48,48,48,53,48,43,48];
-function giro(){
-  const q=.29, t=audio.currentTime+.06;
+// il brano viene preparato come file audio: sul telefono è più affidabile e si sente di più
+function creaBrano(){
+  const SR=22050, q=.29, campioni=new Float32Array(Math.round(SR*65*q));
+  function nota(midi,inizio,durata,volume){
+    const f=440*Math.pow(2,(midi-69)/12), da=Math.round(inizio*SR), n=Math.round(durata*SR);
+    for(let i=0;i<n&&da+i<campioni.length;i++){
+      const x=i/SR, inviluppo=Math.min(1,x/.01)*Math.exp(-4*x/durata)*Math.min(1,(durata-x)/.03);
+      campioni[da+i]+=volume*inviluppo*(Math.sin(2*Math.PI*f*x)+.35*Math.sin(4*Math.PI*f*x)+(f*2.76<SR/2?.15*Math.sin(2*Math.PI*f*2.76*x):0));
+    }
+  }
   let battito=0;
-  melodia.forEach(([m,d])=>{nota(m,t+battito*q,Math.max(.45,d*q*1.5),.07);battito+=d});
+  melodia.forEach(([m,d])=>{nota(m,battito*q,Math.max(.5,d*q*1.5),1);battito+=d});
   bassi.forEach((m,i)=>{for(let k=0;k<4;k++){
-    const quando=t+(i*4+k)*q;
-    nota(k%2?m+19:(k?m+7:m),quando,k%2?.25:.55,k%2?.018:.05);
-    nota(108,quando,.12,.008); // campanellini
+    const t=(i*4+k)*q;
+    nota(k%2?m+19:(k?m+19:m+12),t,k%2?.25:.5,k%2?.22:.4);
+    nota(108,t,.1,.06);
   }});
-  ciclo=setTimeout(giro,(battito+1)*q*1000);
+  let picco=0;for(const v of campioni)picco=Math.max(picco,Math.abs(v));
+  const dati=new DataView(new ArrayBuffer(44+campioni.length*2));
+  const scrivi=(p,t)=>[...t].forEach((l,i)=>dati.setUint8(p+i,l.charCodeAt(0)));
+  scrivi(0,'RIFF');dati.setUint32(4,36+campioni.length*2,true);scrivi(8,'WAVEfmt ');
+  dati.setUint32(16,16,true);dati.setUint16(20,1,true);dati.setUint16(22,1,true);dati.setUint32(24,SR,true);dati.setUint32(28,SR*2,true);dati.setUint16(32,2,true);dati.setUint16(34,16,true);
+  scrivi(36,'data');dati.setUint32(40,campioni.length*2,true);
+  campioni.forEach((v,i)=>dati.setInt16(44+i*2,Math.tanh(v/picco*3)/Math.tanh(3)*32000,true));
+  return new Blob([dati],{type:'audio/wav'});
 }
-function suonaMagia(){if(suona&&audio)[86,90,93,98].forEach((m,i)=>nota(m,audio.currentTime+i*.09,1.4,.08))}
-function parti(){
-  if(!suona)return;
-  if(!audio){audio=new (window.AudioContext||window.webkitAudioContext)();audio.resume();giro()}
-  else if(audio.state!=='running')audio.resume();
+player=new Audio(URL.createObjectURL(creaBrano()));player.loop=true;player.preload='auto';player.setAttribute('playsinline','');
+function parti(){if(suona&&player.paused){const p=player.play();if(p)p.catch(()=>{})}}
+function etichetta(){
+  bMus.textContent='';const n=document.createElement('span');n.textContent='♪';const t=document.createElement('em');t.textContent=suona?' Musica: sì':' Musica: no';bMus.append(n,t);
+  bMus.classList.toggle('spenta',!suona);bMus.setAttribute('aria-label','Musica: '+(suona?'sì':'no'));
 }
-function ferma(){clearTimeout(ciclo);if(audio){audio.close();audio=null}}
-function etichetta(){bMus.textContent='';const n=document.createElement('span');n.textContent='♪';const t=document.createElement('em');t.textContent=suona?' Musica: sì':' Musica: no';bMus.append(n,t);bMus.classList.toggle('spenta',!suona);bMus.setAttribute('aria-label','Musica: '+(suona?'sì':'no'));bMus.setAttribute('aria-pressed',String(suona))}
-bMus.onclick=()=>{suona=!suona;suona?parti():ferma();etichetta()};
+bMus.onclick=()=>{
+  if(suona&&player.paused){parti();return} // segna sì ma è ancora muta: la avvia
+  suona=!suona;suona?parti():player.pause();etichetta();
+};
 // i browser permettono l'audio solo dopo un tocco: parte al primo gesto
-['click','touchend','keydown'].forEach(t=>document.addEventListener(t,e=>{if(e.target!==bMus)parti()},true));
-document.addEventListener('visibilitychange',()=>{if(document.hidden)ferma()});
+['click','touchend','keydown'].forEach(t=>document.addEventListener(t,e=>{if(!bMus.contains(e.target))parti()},true));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)player.pause()});
 etichetta();
 // conto alla rovescia: resta nascosto finché non c'è la data, es. '2000-01-31T18:00:00+01:00'
 const SCAMBIO=null;
