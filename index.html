@@ -325,13 +325,13 @@ async function inizio(){
   if(!pronto) return apertura();
   pulisci(false);
   el('p','Scopri a chi devi fare il regalo');
-  el('button','Scegli il tuo nome',()=>scegli(nomi),'scelta');
+  el('button','Inserisci il tuo nome',()=>scegli(nomi),'scelta');
   el('br');
   el('button','Area organizzatore',login,'rosso');
 }
 function scegli(nomi){
   const velo=document.createElement('div');velo.className='velo';
-  velo.innerHTML='<div class="foglio" role="dialog" aria-modal="true" aria-label="Scegli il tuo nome"><div class="testa"><strong>Chi sei?</strong><button type="button" class="chiudi" aria-label="Chiudi">✕</button></div><input type="search" class="cerca" placeholder="Cerca il tuo nome" aria-label="Cerca il tuo nome" autocomplete="off"><div class="lista"></div></div>';
+  velo.innerHTML='<div class="foglio" role="dialog" aria-modal="true" aria-label="Inserisci il tuo nome"><div class="testa"><strong>Chi sei?</strong><button type="button" class="chiudi" aria-label="Chiudi">✕</button></div><input type="search" class="cerca" placeholder="Cerca il tuo nome" aria-label="Cerca il tuo nome" autocomplete="off"><div class="lista"></div></div>';
   document.body.appendChild(velo);
   const cerca=velo.querySelector('.cerca'), lista=velo.querySelector('.lista');
   const semplice=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
