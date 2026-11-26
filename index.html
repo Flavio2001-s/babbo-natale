@@ -40,6 +40,12 @@ button.secondario{background:#fff4d6;color:#7d0a14;box-shadow:0 4px 0 #d4a843;fo
 .chip{display:inline-block;font:600 15px system-ui,sans-serif;padding:8px 14px;margin:4px;border-radius:99px;box-shadow:none}
 .fatto{background:#e4e0d8;color:#5d564c}
 input{font:inherit;width:100%;max-width:340px;padding:13px 16px;margin:5px;border:2px solid #d4a843;border-radius:99px;text-align:center}
+select{font:600 18px system-ui,sans-serif;width:100%;max-width:340px;padding:14px 18px;margin:5px 0 12px;border:2px solid #d4a843;border-radius:99px;background:#fff;color:#2b1d16;text-align:center}
+input.pin{font-size:24px;letter-spacing:6px;max-width:240px}
+.nota{font-size:14px;color:#7a665c}
+.manca{background:#a50f1a;color:#fff}
+.barra{height:14px;border-radius:99px;background:#e9e0cf;overflow:hidden}.barra i{display:block;height:100%;background:linear-gradient(90deg,#1f7a52,#37b57a)}
+@media(max-width:500px){body{padding:12px 10px;align-items:flex-start}#app{padding:14px 16px 20px}.babbo{width:112px}.regalo{width:58px}.r2{width:68px}.luci i:nth-child(even){display:none}}
 </style></head><body><svg width="0" height="0" style="position:absolute"><defs>
 <radialGradient id="pelle" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#ffe0c7"/><stop offset="1" stop-color="#e5a582"/></radialGradient>
 <radialGradient id="barba" cx=".5" cy=".25" r=".85"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f1f4f8"/><stop offset="1" stop-color="#bcc8d6"/></radialGradient>
@@ -69,79 +75,108 @@ input{font:inherit;width:100%;max-width:340px;padding:13px 16px;margin:5px;borde
 const URL_API='https://zcykviesiinezzuyoprn.supabase.co/rest/v1/rpc/';
 const CHIAVE='sb_publishable_NCMbolO_pS9v6EWQsoGEbw_c11nlTUL';
 const app=document.getElementById('app');
-let PW='', S=[];
+let PW='', S=[], timer=null;
 function el(tag,testo,fn,cls){const e=document.createElement(tag);e.textContent=testo||'';if(fn)e.onclick=fn;if(cls)e.className=cls;app.appendChild(e);return e}
 async function api(fn,dati){
   const r=await fetch(URL_API+fn,{method:'POST',headers:{apikey:CHIAVE,'Content-Type':'application/json'},body:JSON.stringify(dati||{})});
   if(!r.ok) throw new Error('Il server ha risposto '+r.status);
   const j=await r.json(); if(j&&j.errore) throw new Error(j.errore); return j;
 }
-function errore(e){alert(e instanceof TypeError?'Connessione assente: controlla internet.':e.message)}
+function messaggio(e){return e instanceof TypeError?'Connessione assente: controlla internet.':e.message}
+function pulisci(){clearTimeout(timer);app.innerHTML=''}
 // blocca i doppi clic mentre aspetta il server
-function azione(testo,fn,cls){const b=el('button',testo,async()=>{b.disabled=true;try{await fn()}catch(e){errore(e)}b.disabled=false},cls);return b}
-function campo(etichetta){const i=el('input');i.type='password';i.placeholder=etichetta;i.autocomplete='off';el('br');return i}
-async function carica(){S=(await api('bns_elenco',{pw:PW})).persone}
-async function inizio(){
-  app.innerHTML=''; el('p','Caricamento...');
-  let pronto;
-  try{pronto=await api('bns_pronto')}catch(e){app.innerHTML='';el('p','Non riesco a collegarmi.');azione('Riprova',inizio);return}
-  app.innerHTML='';
-  el('p',pronto?'Area organizzatore: inserisci la password':'Primo accesso: crea la password organizzatore (almeno 8 caratteri)');
-  const p1=campo('Password'), p2=pronto?null:campo('Ripeti la password');
-  const entra=azione(pronto?'Entra':'Crea ed estrai',async()=>{
-    if(!pronto){
-      if(p1.value!==p2.value) throw new Error('Le due password sono diverse');
-      await api('bns_crea_password',{pw:p1.value});
-    }
-    PW=p1.value; await carica(); turno();
-  });
-  (p2||p1).onkeydown=e=>{if(e.key==='Enter')entra.click()};
+function azione(testo,fn,cls){const b=el('button',testo,async()=>{b.disabled=true;try{await fn()}catch(e){alert(messaggio(e))}b.disabled=false},cls);return b}
+function campo(etichetta,pin){
+  const i=el('input');i.type='password';i.placeholder=etichetta;i.autocomplete='off';i.setAttribute('aria-label',etichetta);
+  if(pin){i.inputMode='numeric';i.maxLength=4;i.className='pin';i.oninput=()=>i.value=i.value.replace(/[^0-9]/g,'')}
+  el('br');return i;
 }
-function esci(){PW='';S=[];inizio()}
-function riepilogo(k){
-  app.innerHTML='';
+function invio(i,b){i.onkeydown=e=>{if(e.key==='Enter')b.click()}}
+
+async function inizio(){
+  PW='';S=[];pulisci(); el('p','Caricamento...');
+  let pronto,nomi;
+  try{pronto=await api('bns_pronto'); if(pronto) nomi=await api('bns_nomi')}
+  catch(e){pulisci();el('p','Non riesco a collegarmi.');azione('Riprova',inizio);return}
+  if(!pronto) return apertura();
+  pulisci();
+  el('p','Scopri a chi devi fare il regalo');
+  const sel=el('select');sel.setAttribute('aria-label','Il tuo nome');
+  sel.add(new Option('Scegli il tuo nome...',''));
+  nomi.forEach(n=>sel.add(new Option(n.nome,n.id)));
+  el('br');
+  sel.onchange=()=>{const x=nomi.find(n=>n.id==sel.value); if(x) accesso(x)};
+  el('button','Area organizzatore',login,'rosso');
+}
+function accesso(x){
+  pulisci();
+  el('h2','Ciao '+x.nome+'!');
+  el('p',x.ha_pin?'Inserisci il tuo PIN di 4 cifre':'Primo accesso: crea il tuo PIN di 4 cifre e ricordalo. Ti servirà per rivedere il nome.');
+  if(x.ha_pin) el('p','Non hai mai creato un PIN? Avvisa Flavio.',null,'nota');
+  const p1=campo('PIN',true), p2=x.ha_pin?null:campo('Ripeti il PIN',true);
+  const ok=azione(x.ha_pin?'Mostra il mio nome':'Sono '+x.nome+': crea il PIN',async()=>{
+    if(!/^[0-9]{4}$/.test(p1.value)) throw new Error('Il PIN deve essere di 4 cifre');
+    if(p2&&p1.value!==p2.value) throw new Error('I due PIN sono diversi');
+    const r=await api('bns_entra',{chi:x.id,pin:p1.value,crea:!x.ha_pin});
+    risultato(x.nome,r.nome);
+  });
+  invio(p2||p1,ok);
+  el('br'); el('button','Non sono '+x.nome+', torna indietro',inizio,'rosso');
+  p1.focus();
+}
+function risultato(io,destinatario){
+  pulisci();
+  el('p',io+', devi fare il regalo a');
+  el('div',destinatario,null,'big');
+  el('p','Acqua in bocca! La schermata si chiude da sola dopo un minuto.',null,'nota');
+  el('button','Ho letto, esci',inizio);
+  timer=setTimeout(inizio,60000);
+}
+function apertura(){
+  pulisci();
+  el('p','L\'estrazione non è ancora aperta.');
+  el('p','Solo per l\'organizzatore: crea la password (almeno 8 caratteri)',null,'nota');
+  const p1=campo('Password'), p2=campo('Ripeti la password');
+  invio(p2,azione('Apri l\'estrazione',async()=>{
+    if(p1.value!==p2.value) throw new Error('Le due password sono diverse');
+    await api('bns_crea_password',{pw:p1.value});
+    PW=p1.value; await carica(); riepilogo();
+  }));
+}
+function login(){
+  pulisci(); el('h2','Area organizzatore');
+  const p=campo('Password');
+  invio(p,azione('Entra',async()=>{PW=p.value;await carica();riepilogo()}));
+  el('br'); el('button','Torna indietro',inizio,'rosso');
+}
+async function carica(){S=(await api('bns_elenco',{pw:PW})).persone}
+function riepilogo(){
+  pulisci();
   const manca=S.filter(x=>!x.quando), fatti=S.filter(x=>x.quando);
   el('h2','Hanno estratto '+fatti.length+' su '+S.length);
+  const barra=el('div',null,null,'barra'), pieno=document.createElement('i');
+  pieno.style.width=(100*fatti.length/(S.length||1))+'%';barra.appendChild(pieno);
   el('h3','Mancano ('+manca.length+')');
-  if(manca.length) el('p','Clicca un nome per chiamare subito quella persona.');
-  manca.forEach((x,i)=>el('button',x.nome,()=>turno(i),'chip'));
+  manca.forEach(x=>el('span',x.nome,null,'chip manca'));
   el('h3','Hanno già estratto ('+fatti.length+')');
-  fatti.forEach(x=>el('span','✓ '+x.nome+' · '+x.quando,null,'chip fatto'));
-  el('p'); el('button','Torna all\'estrazione',()=>turno(k));
+  if(fatti.length) el('p','Clicca un nome solo se devi azzerare il suo PIN.',null,'nota');
+  fatti.forEach(x=>el('button','✓ '+x.nome+' · '+x.quando,()=>azzera(x),'chip fatto'));
+  el('p'); azione('Aggiorna',async()=>{await carica();riepilogo()},'secondario');
+  el('button','Esci',inizio);
   el('br'); el('button','Annulla tutto e ricomincia',ricomincia,'rosso');
 }
-function ricomincia(){
-  app.innerHTML='';
-  el('h2','Annullare tutto?');
-  el('p','Chi ha già estratto dovrà rifarlo. Per confermare reinserisci la password.');
-  const p=campo('Password');
-  azione('Sì, rifai l\'estrazione',async()=>{await api('bns_ricomincia',{pw:p.value});await carica();turno()});
-  el('button','No, torna indietro',()=>turno());
+function azzera(x){
+  pulisci(); el('h2','Azzerare il PIN di '+x.nome+'?');
+  el('p','Dovrà crearne uno nuovo. Il nome estratto resta lo stesso.');
+  azione('Sì, azzera il PIN',async()=>{await api('bns_azzera_pin',{pw:PW,chi:x.id});await carica();riepilogo()});
+  el('button','No, torna indietro',riepilogo);
 }
-function turno(salto){
-  app.innerHTML='';
-  const rest=S.filter(x=>!x.quando);
-  const k=rest.length?(salto||0)%rest.length:0;
-  if(!rest.length){el('p','Tutti hanno estratto. Buon Natale!',null,'big')}
-  else{
-    const x=rest[k];
-    el('p','Adesso tocca a');
-    el('div',x.nome,null,'big');
-    el('p','Fate mettere solo questa persona davanti al PC');
-    azione('Sono '+x.nome+': mostra',async()=>{
-      const r=await api('bns_pesca',{pw:PW,chi:x.id});
-      x.quando=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',timeZone:'Europe/Rome'});
-      app.innerHTML='';
-      el('p',x.nome+', devi fare il regalo a');
-      el('div',r.nome,null,'big');
-      el('button','Ho letto, nascondi',()=>turno(k));
-    });
-    if(rest.length>1) el('button','Non c\'è, chiama un altro',()=>turno(k+1));
-    el('p','Mancano: '+rest.length);
-  }
-  el('p');
-  azione('Chi ha estratto e chi manca',async()=>{await carica();riepilogo(k)},'secondario');
-  el('button','Esci',esci,'rosso');
+function ricomincia(){
+  pulisci(); el('h2','Annullare tutto?');
+  el('p','Cambiano gli abbinamenti e si cancellano tutti i PIN. Per confermare reinserisci la password.');
+  const p=campo('Password');
+  azione('Sì, rifai l\'estrazione',async()=>{await api('bns_ricomincia',{pw:p.value});await carica();riepilogo()});
+  el('button','No, torna indietro',riepilogo);
 }
 inizio();
 for(let i=0;i<45;i++){const f=document.createElement('div');f.className='neve';f.textContent='❄';
