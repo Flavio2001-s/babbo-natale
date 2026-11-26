@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta name="robots" content="noindex"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Babbo Natale Segreto</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#2b1d16;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 16px;text-align:center;background:radial-gradient(circle at 50% 0,#1f6b4a,#0b2e22 55%,#061a13) fixed}
+main{position:relative;z-index:1;width:100%;max-width:680px;background:#fff9ef;border-radius:26px;overflow:hidden;box-shadow:0 25px 70px #0009,0 0 0 6px #d4a843}
+header{background:linear-gradient(135deg,#b3141f,#7d0a14);color:#fff;padding:26px 20px 22px;border-bottom:8px solid transparent;border-image:repeating-linear-gradient(45deg,#d4a843 0 14px,#fff9ef 14px 28px) 8}
+header .icone{font-size:40px;letter-spacing:10px}
+h1{font-family:Georgia,serif;font-size:clamp(28px,6vw,42px);margin:8px 0 14px;text-shadow:0 3px 0 #0004}
+.firma{display:inline-block;padding:7px 18px;border:2px solid #f3d27a;border-radius:99px;color:#ffe9a8;font-weight:600;letter-spacing:1px}
+#app{padding:22px 28px 28px;font-size:18px}
+textarea{width:100%;height:280px;font:inherit;padding:14px;border:2px solid #d4a843;border-radius:14px;background:#fff}
+button{font:600 18px system-ui,sans-serif;padding:15px 28px;margin:7px;border:0;border-radius:99px;background:linear-gradient(#1f7a52,#145c3d);color:#fff;cursor:pointer;box-shadow:0 5px 0 #0b3d28;transition:transform .1s}
+button:hover{transform:translateY(-2px)}
+button:active{transform:translateY(3px);box-shadow:0 2px 0 #0b3d28}
+button.rosso{background:none;box-shadow:none;color:#9a6b63;font-size:13px;font-weight:400;text-decoration:underline;padding:6px}
+.big{font:700 clamp(32px,7vw,50px)/1.2 Georgia,serif;color:#a50f1a;margin:20px 0;padding:22px 14px;border:3px dashed #d4a843;border-radius:18px;background:#fff;overflow-wrap:anywhere;animation:pop .4s ease-out}
+@keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.neve{position:fixed;top:-30px;color:#fff;pointer-events:none;animation:cade linear infinite}
+@keyframes cade{to{transform:translateY(110vh) rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.neve{display:none}.big{animation:none}}
+header{padding-top:8px;background:radial-gradient(circle at 50% 30%,#d9262f,#7d0a14 75%)}
+.luci{display:flex;justify-content:space-between;border-top:2px solid #0b2e22;margin:0 -8px}
+.luci i{width:11px;height:17px;border-radius:50%;background:#ffd54a;box-shadow:0 0 12px 3px currentColor;color:#ffd54a;animation:luce 1.4s ease-in-out infinite alternate}
+.luci i:nth-child(3n+2){background:#59e08c;color:#59e08c;animation-delay:-.5s}
+.luci i:nth-child(3n){background:#62c8ff;color:#62c8ff;animation-delay:-1s}
+@keyframes luce{to{opacity:.3}}
+.scena{display:flex;justify-content:center;align-items:flex-end;gap:14px;margin-top:6px;filter:drop-shadow(0 7px 7px #0006)}
+.babbo{width:150px;animation:dondola 3.5s ease-in-out infinite}
+.regalo{width:82px}.r2{width:96px}
+@keyframes dondola{50%{transform:translateY(-6px) rotate(2deg)}}
+h1{margin:4px 0 6px;color:#fff4d6;text-shadow:0 3px 0 #4d050b,0 0 20px #ffcf5a66}
+.firma{border:0;padding:0;font:italic 700 28px "Snell Roundhand","Segoe Script","Brush Script MT",cursive;color:#ffe08a}
+@media(max-height:850px){.babbo{width:132px}.regalo{width:62px}.r2{width:72px}header{padding-bottom:14px}.big{margin:10px 0;padding:14px}#app{padding:6px 28px 14px}body{padding:14px}}
+@media(prefers-reduced-motion:reduce){.babbo,.luci i{animation:none}}
+.budget{display:inline-block;margin-top:8px;padding:6px 18px;border-radius:99px;background:#fff4d6;color:#7d0a14;font-weight:700}
+h2{color:#a50f1a;margin:4px 0}h3{margin:20px 0 8px;border-bottom:2px solid #d4a843;padding-bottom:6px}
+button.secondario{background:#fff4d6;color:#7d0a14;box-shadow:0 4px 0 #d4a843;font-size:16px;padding:11px 20px}
+.chip{display:inline-block;font:600 15px system-ui,sans-serif;padding:8px 14px;margin:4px;border-radius:99px;box-shadow:none}
+.fatto{background:#e4e0d8;color:#5d564c}
+input{font:inherit;width:100%;max-width:340px;padding:13px 16px;margin:5px;border:2px solid #d4a843;border-radius:99px;text-align:center}
+</style></head><body><svg width="0" height="0" style="position:absolute"><defs>
+<radialGradient id="pelle" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#ffe0c7"/><stop offset="1" stop-color="#e5a582"/></radialGradient>
+<radialGradient id="barba" cx=".5" cy=".25" r=".85"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f1f4f8"/><stop offset="1" stop-color="#bcc8d6"/></radialGradient>
+<linearGradient id="rosso" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4a4a"/><stop offset="1" stop-color="#8c0712"/></linearGradient>
+<linearGradient id="oro" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0ad"/><stop offset="1" stop-color="#b98416"/></linearGradient>
+<linearGradient id="verde" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#37b57a"/><stop offset="1" stop-color="#0c5236"/></linearGradient>
+</defs></svg><main><header><div class="luci"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="scena"><svg class="regalo r1" viewBox="0 0 100 110" aria-hidden="true"><ellipse cx="50" cy="103" rx="43" ry="5" opacity=".25"/>
+<rect x="14" y="48" width="72" height="54" rx="4" fill="url(#verde)"/><rect x="8" y="34" width="84" height="19" rx="4" fill="url(#verde)"/><rect x="14" y="53" width="72" height="5" opacity=".22"/>
+<rect x="43" y="34" width="14" height="68" fill="url(#oro)"/><path d="M50 34C30 4 8 18 24 31q9 6 26 3C67 37 90 28 76 17 62 8 54 24 50 34z" fill="url(#oro)"/>
+<path d="M45 29C32 16 21 19 29 26zM55 29c13-13 24-10 16-3z" fill="#0003"/><circle cx="50" cy="33" r="7" fill="url(#oro)" stroke="#0002"/></svg><svg class="babbo" viewBox="0 0 200 210" role="img" aria-label="Babbo Natale">
+<path d="M45 82C48 28 100 5 140 24c28 13 40 40 38 72l-17-3c-2-20-9-31-21-36l15 28z" fill="url(#rosso)"/>
+<g fill="url(#barba)"><circle cx="172" cy="100" r="17"/><circle cx="50" cy="108" r="20"/><circle cx="150" cy="108" r="20"/></g>
+<ellipse cx="100" cy="104" rx="49" ry="43" fill="url(#pelle)"/>
+<path d="M48 108c-14 20-8 40 4 48 0 18 15 28 27 28 6 18 36 18 42 0 14 0 28-12 27-28 14-9 18-30 4-48-12 18-26 18-52 16-26 2-40 2-52-16z" fill="url(#barba)"/>
+<g fill="#fff"><rect x="40" y="68" width="120" height="25" rx="12.5"/><circle cx="52" cy="80" r="14"/><circle cx="76" cy="77" r="14"/><circle cx="101" cy="76" r="15"/><circle cx="126" cy="77" r="14"/><circle cx="149" cy="80" r="14"/></g>
+<g stroke="#fff" stroke-width="7" stroke-linecap="round" fill="none"><path d="M68 99q11-8 22-1"/><path d="M110 98q11-7 22 1"/></g>
+<g fill="#26313f"><circle cx="80" cy="110" r="5"/><circle cx="120" cy="110" r="5"/></g><g fill="#fff"><circle cx="82" cy="108" r="1.7"/><circle cx="122" cy="108" r="1.7"/></g>
+<g fill="#f06f62" opacity=".5"><circle cx="68" cy="124" r="9"/><circle cx="132" cy="124" r="9"/></g>
+<path d="M87 143q13 15 26 0z" fill="#8e2630"/>
+<path d="M100 130c-12-10-36-3-46 10 14 12 36 12 46 0 10 12 32 12 46 0-10-13-34-20-46-10z" fill="#fff" stroke="#d3dce6" stroke-width="1.5"/>
+<ellipse cx="100" cy="124" rx="12" ry="10" fill="#e88b72"/><circle cx="96" cy="121" r="3" fill="#fff" opacity=".5"/>
+</svg><svg class="regalo r2" viewBox="0 0 100 110" aria-hidden="true"><ellipse cx="50" cy="103" rx="43" ry="5" opacity=".25"/>
+<rect x="14" y="48" width="72" height="54" rx="4" fill="url(#oro)"/><rect x="8" y="34" width="84" height="19" rx="4" fill="url(#oro)"/><rect x="14" y="53" width="72" height="5" opacity=".22"/>
+<rect x="43" y="34" width="14" height="68" fill="url(#rosso)"/><path d="M50 34C30 4 8 18 24 31q9 6 26 3C67 37 90 28 76 17 62 8 54 24 50 34z" fill="url(#rosso)"/>
+<path d="M45 29C32 16 21 19 29 26zM55 29c13-13 24-10 16-3z" fill="#0003"/><circle cx="50" cy="33" r="7" fill="url(#rosso)" stroke="#0002"/></svg></div><h1>Babbo Natale Segreto</h1><div class="firma">By Flavio</div><br><div class="budget">Budget: 15 € · massimo 20 €</div></header><div id="app"></div></main>
+<script>
+const URL_API='https://zcykviesiinezzuyoprn.supabase.co/rest/v1/rpc/';
+const CHIAVE='sb_publishable_NCMbolO_pS9v6EWQsoGEbw_c11nlTUL';
+const app=document.getElementById('app');
+let PW='', S=[];
+function el(tag,testo,fn,cls){const e=document.createElement(tag);e.textContent=testo||'';if(fn)e.onclick=fn;if(cls)e.className=cls;app.appendChild(e);return e}
+async function api(fn,dati){
+  const r=await fetch(URL_API+fn,{method:'POST',headers:{apikey:CHIAVE,'Content-Type':'application/json'},body:JSON.stringify(dati||{})});
+  if(!r.ok) throw new Error('Il server ha risposto '+r.status);
+  const j=await r.json(); if(j&&j.errore) throw new Error(j.errore); return j;
+}
+function errore(e){alert(e instanceof TypeError?'Connessione assente: controlla internet.':e.message)}
+// blocca i doppi clic mentre aspetta il server
+function azione(testo,fn,cls){const b=el('button',testo,async()=>{b.disabled=true;try{await fn()}catch(e){errore(e)}b.disabled=false},cls);return b}
+function campo(etichetta){const i=el('input');i.type='password';i.placeholder=etichetta;i.autocomplete='off';el('br');return i}
+async function carica(){S=(await api('bns_elenco',{pw:PW})).persone}
+async function inizio(){
+  app.innerHTML=''; el('p','Caricamento...');
+  let pronto;
+  try{pronto=await api('bns_pronto')}catch(e){app.innerHTML='';el('p','Non riesco a collegarmi.');azione('Riprova',inizio);return}
+  app.innerHTML='';
+  el('p',pronto?'Area organizzatore: inserisci la password':'Primo accesso: crea la password organizzatore (almeno 8 caratteri)');
+  const p1=campo('Password'), p2=pronto?null:campo('Ripeti la password');
+  const entra=azione(pronto?'Entra':'Crea ed estrai',async()=>{
+    if(!pronto){
+      if(p1.value!==p2.value) throw new Error('Le due password sono diverse');
+      await api('bns_crea_password',{pw:p1.value});
+    }
+    PW=p1.value; await carica(); turno();
+  });
+  (p2||p1).onkeydown=e=>{if(e.key==='Enter')entra.click()};
+}
+function esci(){PW='';S=[];inizio()}
+function riepilogo(k){
+  app.innerHTML='';
+  const manca=S.filter(x=>!x.quando), fatti=S.filter(x=>x.quando);
+  el('h2','Hanno estratto '+fatti.length+' su '+S.length);
+  el('h3','Mancano ('+manca.length+')');
+  if(manca.length) el('p','Clicca un nome per chiamare subito quella persona.');
+  manca.forEach((x,i)=>el('button',x.nome,()=>turno(i),'chip'));
+  el('h3','Hanno già estratto ('+fatti.length+')');
+  fatti.forEach(x=>el('span','✓ '+x.nome+' · '+x.quando,null,'chip fatto'));
+  el('p'); el('button','Torna all\'estrazione',()=>turno(k));
+  el('br'); el('button','Annulla tutto e ricomincia',ricomincia,'rosso');
+}
+function ricomincia(){
+  app.innerHTML='';
+  el('h2','Annullare tutto?');
+  el('p','Chi ha già estratto dovrà rifarlo. Per confermare reinserisci la password.');
+  const p=campo('Password');
+  azione('Sì, rifai l\'estrazione',async()=>{await api('bns_ricomincia',{pw:p.value});await carica();turno()});
+  el('button','No, torna indietro',()=>turno());
+}
+function turno(salto){
+  app.innerHTML='';
+  const rest=S.filter(x=>!x.quando);
+  const k=rest.length?(salto||0)%rest.length:0;
+  if(!rest.length){el('p','Tutti hanno estratto. Buon Natale!',null,'big')}
+  else{
+    const x=rest[k];
+    el('p','Adesso tocca a');
+    el('div',x.nome,null,'big');
+    el('p','Fate mettere solo questa persona davanti al PC');
+    azione('Sono '+x.nome+': mostra',async()=>{
+      const r=await api('bns_pesca',{pw:PW,chi:x.id});
+      x.quando=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',timeZone:'Europe/Rome'});
+      app.innerHTML='';
+      el('p',x.nome+', devi fare il regalo a');
+      el('div',r.nome,null,'big');
+      el('button','Ho letto, nascondi',()=>turno(k));
+    });
+    if(rest.length>1) el('button','Non c\'è, chiama un altro',()=>turno(k+1));
+    el('p','Mancano: '+rest.length);
+  }
+  el('p');
+  azione('Chi ha estratto e chi manca',async()=>{await carica();riepilogo(k)},'secondario');
+  el('button','Esci',esci,'rosso');
+}
+inizio();
+for(let i=0;i<45;i++){const f=document.createElement('div');f.className='neve';f.textContent='❄';
+f.style.cssText=`left:${Math.random()*100}vw;font-size:${8+Math.random()*18}px;opacity:${.25+Math.random()*.6};animation-duration:${7+Math.random()*10}s;animation-delay:-${Math.random()*17}s`;
+document.body.appendChild(f)}
+</script></body></html>
